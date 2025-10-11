@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- UPDATED: Title and Meta Description, plus added Meta Keywords -->
+    <title id="page-title">RaO Movement | Natural Movement & Personalized Training</title>
+    <meta name="description" content="RaO Movement – Personalized training, conscious movement, and natural development. Rediscover the joy of movement through training based on balance, posture, and primal instincts.">
+    <meta name="keywords" content="personal trainer, natural movement, posture correction, bodily development, conscious fitness, RaO Movement, Bucharest training">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Removed AOS CSS -->
+    
+    <!-- Inter Font Configuration (UPDATED: Added Poppins font) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@400;700;800;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6; /* Light gray for background */
+        }
+        /* NEW: Use Poppins for a more artistic look on headings */
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .header-bg {
+            background-color: #1a1a1a; /* Dark black for header */
+        }
+        .text-primary {
+            color: #007bff; /* Primary blue for accents */
+        }
+        .bg-secondary {
+            background-color: #e6f0ff; /* Light blue background for sections */
+        }
+        .section-separator {
+            border-bottom: 2px solid #ccc;
+        }
+        /* New style for centered 2-line logo */
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers text horizontally */
+            line-height: 1; /* Removes extra space between lines */
+        }
+        
+        /* NEW STYLE FOR BACKGROUND IMAGE (About RaO) */
+        .background-despre {
+            /* NEW URL: https://images.unsplash.com/photo-1611418608121-9c69caf8aa98... */
+            background-image: url('https://images.unsplash.com/photo-1611418608121-9c69caf8aa98?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Makes it look even bigger and more immersive */
+            min-height: 80vh; /* Sets a large minimum height (80% of screen height) */
+            position: relative;
+            color: white; /* Ensures the text above is white */
+        }
+        
+        /* Semi-transparent overlay for text readability - OPACITY REDUCED TO 75% */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black (75%) */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Script for Mobile Menu toggle function (needs to be globally available) -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        
+        // FUNCTIONALITY: Language Switcher
+        function switchLanguage(lang) {
+            const isEnglish = lang === 'en';
+            const enContent = document.getElementById('content-en');
+            const roContent = document.getElementById('content-ro');
+            const pageHtml = document.querySelector('html');
+            const trainerTagline = document.getElementById('trainer-tagline');
+
+            // Define navigation link texts for translation
+            const translations = {
+                'en': {
+                    '#despre': 'About Me',
+                    '#dezvoltare': 'Holistic Development',
+                    '#programe': 'Programs',
+                    '#postura': 'Posture',
+                    '#contact': 'Contact',
+                    'tagline': 'Personal Trainer',
+                    'title': 'RaO Movement | Natural Movement & Personalized Training'
+                },
+                'ro': {
+                    '#despre': 'Despre Mine',
+                    '#dezvoltare': 'Dezvoltare Multilaterală', // SCHIMBAT: Holisitcă -> Multilaterală
+                    '#programe': 'Programe',
+                    '#postura': 'Postura',
+                    '#contact': 'Contact',
+                    'tagline': 'Antrenor Personal',
+                    'title': 'RaO Movement | Mișcare Naturală & Antrenamente Personalizate'
+                }
+            };
+
+            const currentLang = isEnglish ? 'en' : 'ro';
+            const currentTrans = translations[currentLang];
+
+            // 1. Switch Content Blocks
+            if (isEnglish) {
+                enContent.classList.remove('hidden');
+                roContent.classList.add('hidden');
+            } else {
+                roContent.classList.remove('hidden');
+                enContent.classList.add('hidden');
+            }
+
+            // 2. Update HTML attributes and Title
+            pageHtml.lang = currentLang;
+            localStorage.setItem('rao_lang', currentLang);
+            document.getElementById('page-title').innerText = currentTrans.title;
+            trainerTagline.innerText = currentTrans.tagline;
+
+
+            // 3. Update Navigation Links Text (Desktop and Mobile)
+            document.querySelectorAll('a[data-lang-en]').forEach(link => {
+                const targetHref = link.getAttribute('href');
+                if (currentTrans[targetHref]) {
+                    link.innerText = currentTrans[targetHref];
+                }
+            });
+        }
+
+        // FUNCTIONALITY: Smooth Scrolling and Mobile Menu Closing after link click
+        document.addEventListener('DOMContentLoaded', () => {
+            // Restore saved language preference (FIXED: Default to 'ro')
+            const savedLang = localStorage.getItem('rao_lang') || 'ro';
+            switchLanguage(savedLang);
+
+            // Smooth Scrolling Implementation (FIXED: Explicitly find target within the visible block)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    
+                    // Ignore placeholder links (like the language toggle, which uses href="#")
+                    if (href === '#') return; 
+
+                    // Prevent default jump action
+                    e.preventDefault();
+                    
+                    // Determine the current active language block
+                    const currentLang = localStorage.getItem('rao_lang') || 'ro';
+                    const activeContentBlockId = `content-${currentLang}`;
+                    const activeContentBlock = document.getElementById(activeContentBlockId);
+
+                    // Find the target section (e.g., #despre) only inside the active block
+                    const targetElement = activeContentBlock ? activeContentBlock.querySelector(href) : null; 
+
+                    if (targetElement) {
+                        // Smoothly scroll to target
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+
+                        // Close mobile menu after clicking a link
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            // Use the globally defined toggleMenu function to hide it
+                            toggleMenu();
+                        }
+                    }
+                });
+            });
+
+            // EXISTING FUNCTIONALITY: Fade-In Animation (IntersectionObserver)
+            // This is kept for later sections (Programs, Posture, Contact)
+            const targets = document.querySelectorAll('.fade-target');
+            
+            // Setting the root to null means we use the viewport
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                // Triggers when 10% of the element enters the viewport
+                threshold: 0.1 
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Replaces opacity-0 with opacity-100 when the element is visible
+                        entry.target.classList.remove('opacity-0');
+                        entry.target.classList.add('opacity-100');
+                        
+                        // Stops observing the element once it has appeared
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            targets.forEach(target => {
+                observer.observe(target);
+            });
+        });
+    </script>
+
+    <!-- Header and Navigation (Common to both languages, links will jump within the current language block) -->
+    <header class="header-bg shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                
+                <!-- Group 1: Logo and Language Buttons (MOBILE ONLY) -->
+                <div class="flex items-center space-x-3">
+                    <!-- TWO-LINE, CENTERED LOGO -->
+                    <div class="logo-container">
+                        <h1 class="text-4xl font-extrabold text-white">RaO</h1>
+                        <!-- UPDATED: Changed text-base to text-lg for better prominence -->
+                        <span class="text-lg font-semibold text-primary block mt-1" id="trainer-tagline">Personal Trainer</span>
+                    </div>
+                    <!-- End LOGO -->
+                    
+                    <!-- Language Switch Buttons (Mobile Only - Hidden on desktop) -->
+                    <div class="flex md:hidden space-x-1 pt-1"> 
+                        <button onclick="switchLanguage('ro')" class="text-primary hover:text-white transition duration-300 font-bold border-2 border-primary rounded-full px-2 py-1 text-xs bg-gray-800" aria-label="Switch to Romanian Language">RO</button>
+                        <button onclick="switchLanguage('en')" class="text-primary hover:text-white transition duration-300 font-bold border-2 border-primary rounded-full px-2 py-1 text-xs bg-gray-800" aria-label="Switch to English Language">EN</button>
+                    </div>
+                </div>
+                <!-- End Group 1 (Left Side) -->
+
+                <!-- Group 2: Desktop Navigation + Desktop Language Buttons / Mobile Hamburger -->
+                <div class="flex items-center space-x-4">
+                    
+                    <!-- NEW POSITION: Desktop Language Buttons (Visible only on desktop, before nav) -->
+                    <div class="hidden md:flex space-x-2 mr-4">
+                        <button onclick="switchLanguage('ro')" class="text-primary hover:text-white transition duration-300 font-bold border-2 border-primary rounded-full px-3 py-1 text-sm bg-gray-800" aria-label="Switch to Romanian Language">RO</button>
+                        <button onclick="switchLanguage('en')" class="text-primary hover:text-white transition duration-300 font-bold border-2 border-primary rounded-full px-3 py-1 text-sm bg-gray-800" aria-label="Switch to English Language">EN</button>
+                    </div>
+
+                    <!-- Desktop Navigation (Hidden on mobile) -->
+                    <nav class="hidden md:block">
+                        <!-- MODIFIED: Reduced space-x-6 to space-x-4 for tighter navigation links -->
+                        <ul class="flex space-x-4 items-center">
+                            <li><a href="#despre" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="About Me" data-lang-ro="Despre Mine">About Me</a></li>
+                            <li><a href="#dezvoltare" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="Holistic Development" data-lang-ro="Dezvoltare Multilaterală">Holistic Development</a></li>
+                            <li><a href="#programe" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="Programs" data-lang-ro="Programe">Programs</a></li>
+                            <li><a href="#postura" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="Posture" data-lang-ro="Postura">Posture</a></li>
+                            
+                            <li><a href="#contact" class="bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300 font-bold shadow-md" data-lang-en="Contact" data-lang-ro="Contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    
+                    <!-- Mobile Menu Button (Hamburger) -->
+                    <div class="md:hidden">
+                        <button id="menu-button" class="text-white focus:outline-none" onclick="toggleMenu()">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Dropdown Menu (REMOVED REDUNDANT LANGUAGE BUTTONS) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+            <ul class="flex flex-col space-y-2 p-4">
+                <li><a href="#despre" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">About Me</a></li>
+                <li><a href="#dezvoltare" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Holistic Development</a></li>
+                <li><a href="#programe" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Programs</a></li>
+                <li><a href="#postura" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Posture</a></li>
+                <li><a href="#contact" class="block bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300 font-bold shadow-md text-center" onclick="toggleMenu()">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ============================================================================================================================================================== -->
+    <!--                                                                          ENGLISH CONTENT BLOCK                                                                 -->
+    <!-- ============================================================================================================================================================== -->
+
+    <div id="content-en" class="content-block">
+        
+        <!-- 1. About Me - Passion and Vision (Slide 2) - FIXED: Removed opacity-0 for instant loading -->
+        <section id="despre" class="py-24 background-despre section-separator">
+            <!-- The overlay ensures text readability -->
+            <div class="background-overlay"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-opacity duration-200 ease-in"> 
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-12 text-white text-center">About RaO</h2>
+                <div class="space-y-4 md:space-y-8 text-gray-200 text-lg"> <!-- ADJUSTED: space-y-4 on mobile, space-y-8 on desktop -->
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Vision on Movement</h3>
+                    <!-- Text copied exactly from the presentation (Slide 2, first 5 paragraphs) -->
+                    <p class="mb-4">
+                        <strong>Movement has been my passion</strong> for as long as I can remember. Even as a child i’ve been fascinated by what the human body can do — beyond the ordinary. Jumping, rolling, falling safely, resisting gravity, adapting to the unexpected.
+                    </p>
+                    <p class="mb-4">
+                        Over the years, I explored various sports and disciplines varying in style, rhythm, and challenge. Not in search of trophies, but in search of understanding. Every experience taught me something different about how the body thinks and reacts. 
+                    </p>
+                    <p class="mb-4">
+                        Today, I bring that same spirit into my training sessions. My training philosophy is simple: movement should feel natural, a form of exploration and reconnection with one's own body.
+                   
+                    <p class="mb-4">
+                        I want to show people that sport can be done differently than generally promoted. I don't believe in the "no pain, no gain" philosophy or the idea that your worth is measured by how many kilograms you can bench press. For me, movement means understanding your body and working in harmony with it.
+                    </p>
+                    
+                    <!-- TEXT ADDED AS REQUESTED - REMOVED text-primary and font-semibold color -->
+                    <p class="mb-4 italic">
+                        That's why my vision is based on rediscovering fundamental movement. Instead of focusing on exhaustion or records, we will start from the base: how you stand, how you breathe, how you naturally move.  
+                        
+                                                             </p> 
+
+                    <h3 class="text-2xl font-bold mb-4 pt-4 text-primary border-t border-gray-400">Qualifications and Foundations</h3>
+                       <p class="mb-4">
+                        Every stage of life is a new opportunity for evolution. Through <strong>holistic development</strong>, we can build not only better athletes but also healthier, more balanced people, who are better prepared for life's challenges.
+
+                    </p>
+                    <p class="mb-4">
+                        This vision guides my work. Driven by the desire to better understand the body and movement, I obtained qualifications as a fitness, aerobic, and stretching instructor, along with certifications in lifeguard and first aid. I don't see them as formal diplomas, but as real tools through which I can better understand and support the people I work with, while ensuring maximum safety.
+                    </p>
+                    <p class="mb-4 mt-6 font-semibold italic">
+                        Over time, I participated in numerous courses and workshops, but the "Back to Origin" workshop – Adrian Dumitrașcu was the one that confirmed my direction and gave me a solid foundation for posture assessment and neuromuscular reconnection.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Holistic Development (Slide 3 & 4) - FIXED: Removed opacity-0 for instant loading -->
+        <section id="dezvoltare" class="py-16 bg-white section-separator">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-opacity duration-200 ease-in"> 
+                <!-- SIMPLIFIED TITLE (H2) -->
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4 text-gray-900 text-center">Holistic Development</h2>
+                <!-- NEW: DESCRIPTIVE SUBTITLE -->
+                <p class="text-center text-xl italic mb-12 text-gray-700 max-w-4xl mx-auto">
+                    It is the process by which the body acquires varied abilities – not just "doing a sport," but <strong>being able to move well in any context.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Base - Motor Map (Slightly modified design for clarity) -->
+                    <!-- NEW: Added subtle hover effects to cards -->
+                    <div class="p-6 rounded-xl shadow-lg bg-gray-50 border-b-4 border-primary hover:shadow-2xl transition duration-300 hover:-translate-y-1">
+                        <div class="text-4xl text-primary mb-4 text-center">🧠</div> <!-- ADDED EMOJI -->
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 text-center">Motor Maps — The Foundation of Movement</h3>
+                        <p class="text-gray-700 text-lg">
+                            <strong>'What are motor maps?'</strong> 
+                            They are connections created between the brain, nervous system, and muscles, which tell the body how, when, and how much to move.
+                        </p>
+                        <p class="mt-3 text-base italic text-red-500">
+                            How many motor maps should our brain know? Answer: as many as possible!
+                        </p>
+                    </div>
+
+                    <!-- Primal Instincts (Slightly modified design for clarity) -->
+                    <!-- NEW: Added subtle hover effects to cards -->
+                    <div class="p-6 rounded-xl shadow-lg bg-gray-50 border-b-4 border-primary hover:shadow-2xl transition duration-300 hover:-translate-y-1">
+                        <div class="text-4xl text-primary mb-4 text-center">🏃</div> <!-- REMAINED: 🏃 (Running/Basic Movement) -->
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 text-center">Fundamental Instincts</h3>
+                        <p class="text-gray-700 text-lg">
+                            <strong>Primal instincts:</strong> crawling, walking, running, jumping, throwing, catching, climbing, pushing, pulling, rolling, and striking. The foundation of any sport and an active life.
+                        </p>
+                        <p class="mt-3 text-base italic text-red-500">
+                            A correct foundation offers safety and efficiency in movement.
+                        </p>
+                    </div>
+
+                    <!-- Principles - Discipline (Slightly modified design for clarity) -->
+                    <!-- NEW: Added subtle hover effects to cards -->
+                    <div class="p-6 rounded-xl shadow-lg bg-gray-50 border-b-4 border-primary hover:shadow-2xl transition duration-300 hover:-translate-y-1">
+                        <div class="text-4xl text-primary mb-4 text-center">🧘</div> <!-- MODIFIED: 🕰️ -> 🧘 (Meditation/Patience) -->
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 text-center">Discipline and Growth</h3>
+                        <p class="text-gray-700 text-lg">
+                            Varied movement develops <strong>patience, perseverance, and consistency</strong>. forms of discipline that are not imposed, but discovered at the pace of each training session. 
+                            <p class="mt-3 text-base italic text-red-500">
+                                Real discipline does not mean forcing, but constant return to movement.
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Programs (Slide 5) -->
+        <section id="programe" class="py-16 bg-secondary section-separator">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 transition-opacity duration-200 ease-in fade-target"> <!-- FADE TARGET -->
+                <!-- THE TITLE "RaO Programs" WAS COMPLETELY REMOVED -->
+                
+                <!-- LARGE KEY SUBTITLE - MODIFIED FOR NO COLOR, ONLY BOLD ON KEYWORDS -->
+                <h3 class="text-3xl font-extrabold text-gray-900 mx-auto max-w-4xl text-center mb-12">
+                    My training sessions aim to improve primal instincts and restore the connection between body and mind, so that movement becomes natural, efficient, and enjoyable again.
+                </h3>
+
+                <!-- 3-COLUMN GRID (2 for group programs, 1 for personal program) -->
+                <div class="program-grid grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- COLUMN 1: GROUP PROGRAMS (Chess, Contact, Falling, Breakdance & Capoeira) -->
+                    <div class="md:col-span-2 p-8 rounded-xl bg-white shadow-2xl border-t-8 border-primary">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900 text-center border-b pb-4">Training Structure</h3>
+                        
+                        <!-- HERE THE GAP INCREASE APPLIES TO MOBILE -->
+                        <div class="grid grid-cols-2 gap-8 sm:gap-6">
+                            <!-- 1. Chess -->
+                            <!-- NEW: Added subtle hover effects to cards -->
+                            <div class="p-3 sm:p-4 bg-gray-50 rounded-lg shadow-md transition duration-300 hover:shadow-lg hover:-translate-y-0.5"> <!-- ADJUSTED PADDING: p-3 on mobile -->
+                                <div class="text-center text-4xl mb-2 text-primary">♟️</div>
+                                <h4 class="text-lg font-bold text-gray-900 text-center">Chess</h4>
+                                <p class="text-gray-700 text-base text-center">
+                                    Logic, concentration, and strategic planning.
+                                </p>
+                            </div>
+
+                            <!-- 2. Contact Sports -->
+                            <!-- NEW: Added subtle hover effects to cards -->
+                            <div class="p-3 sm:p-4 bg-gray-50 rounded-lg shadow-md transition duration-300 hover:shadow-lg hover:-translate-y-0.5"> <!-- ADJUSTED PADDING: p-3 on mobile -->
+                                <div class="text-center text-4xl mb-2 text-primary">🥊</div> 
+                                <h4 class="text-lg font-bold text-gray-900 text-center">Contact Sports</h4>
+                                <p class="text-gray-700 text-base text-center">
+                                    Developing strength and self-defense techniques.
+                                </p>
+                            </div>
+
+                            <!-- 3. Correct Falling (MODIFIED: Shield -> Green Checkmark) -->
+                            <!-- NEW: Added subtle hover effects to cards -->
+                            <div class="p-3 sm:p-4 bg-gray-50 rounded-lg shadow-md transition duration-300 hover:shadow-lg hover:-translate-y-0.5"> <!-- ADJUSTED PADDING: p-3 on mobile -->
+                                <div class="text-center text-4xl mb-2 text-green-500">✅</div>
+                                <h4 class="text-lg font-bold text-gray-900 text-center">Correct Falling</h4>
+                                <p class="text-gray-700 text-base text-center">
+                                    Vital element of personal safety and body awareness.
+                                </p>
+                            </div>
+                            
+                            <!-- 4. Breakdance & Capoeira (COMBINED) -->
+                            <!-- NEW: Added subtle hover effects to cards -->
+                            <div class="p-3 sm:p-4 bg-gray-50 rounded-lg shadow-md transition duration-300 hover:shadow-lg hover:-translate-y-0.5"> <!-- ADJUSTED PADDING: p-3 on mobile -->
+                                <div class="text-center text-4xl mb-2 text-primary">🤸🎶</div>
+                                <h4 class="text-lg font-bold text-gray-900 text-center">Breakdance & Capoeira</h4>
+                                <p class="text-gray-700 text-base text-center">
+                                    Exploring movement, fluidity, coordination, and the specific rhythm of both disciplines.
+                                </p>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- COLUMN 2: PERSONAL TRAINING -->
+                    <div class="p-8 rounded-xl bg-white shadow-2xl transition duration-300 transform hover:scale-105 border-t-8 border-green-500 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center text-5xl mb-4 text-green-500">🎯</div>
+                            <h3 class="text-2xl font-extrabold mb-3 text-gray-900 text-center">Personal Training</h3>
+                            <p class="text-gray-700 text-lg text-center mb-6">
+                                Individual sessions tailored to your goals.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-700 text-base space-y-2 text-left mx-auto max-w-xs">
+                                <li>Posture Correction</li>
+                                <li>Progress Evaluation and Adaptation</li>
+                                <li>Guidance in Choosing the Right Sport</li>
+                                <li>Personalized Plans</li>
+                                <li>Optimizing Sports Performance</li>
+                            </ul>
+                        </div>
+                        <a href="#contact" class="mt-6 bg-green-500 text-white font-bold py-3 px-6 rounded-full text-center hover:bg-green-600 transition">Request a Personalized Offer</a>
+                    </div>
+                    
+                </div>
+                
+                <!-- Adjusted general message -->
+                <p class="text-center text-lg mt-10 text-gray-700 max-w-4xl mx-auto italic">
+                    Each age stage has its challenges and needs, and the training sessions are adapted accordingly to support balanced and harmonious development.
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. Why Posture Matters (Slide 6) -->
+        <section id="postura" class="py-16 bg-white section-separator">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 transition-opacity duration-200 ease-in fade-target"> <!-- FADE TARGET -->
+                <!-- SIMPLIFIED TITLE (H2) -->
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-12 text-gray-900 text-center">Posture: The Foundation of Health</h2>
+                <p class="text-center text-xl mb-10 text-gray-700 max-w-3xl mx-auto">
+                    Posture doesn't just mean "standing straight." It is the efficient, balanced, and natural way the body organizes its bones, muscles, and joints.
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Posture Benefits (Description font size increased to text-lg) -->
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">1. Prevents Pain</h4> 
+                        <p class="text-lg text-gray-700">Reduces pressure on the spine, shoulders, knees, or hips, preventing contractures, blockages, and deformities.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">2. Optimizes Breathing</h4> 
+                        <p class="text-lg text-gray-700">When the spine and rib cage are aligned, the lungs can work correctly, and the diaphragm moves freely. The result: you breathe better, tire less easily, and have more mental clarity.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">3. Improves Movement</h4> 
+                        <p class="text-lg text-gray-700">Posture is the "starting point" of any movement. If the base is unbalanced, the body compensates. If the posture is correct, movement becomes more fluid, safer, and more efficient.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">4. Supports Child Development</h4> 
+                        <p class="text-lg text-gray-700">In children and adolescents, posture influences the way they grow, move, breathe, and prepare for sports or daily life. Wrong habits turn into problems later.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">5. Contributes to Confidence</h4> 
+                        <p class="text-lg text-gray-700">Posture conveys how you feel about yourself. A balanced posture supports not only the body, but also the psychological state, attention, and the way you present or interact.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">6. Reduces Joint Wear</h4> 
+                        <p class="text-lg text-gray-700">When the body is aligned, every joint does its job with minimal effort. When posture is disrupted, the body compensates, and some areas "pull" in place of others, leading to inflammation and wear.</p> 
+                    </div>
+                </div>
+
+                <!-- NEW: Posture Section Conclusion -->
+                <div class="mt-12 pt-8 border-t border-gray-300 text-center">
+                    <p class="text-2xl font-extrabold text-gray-900 leading-relaxed max-w-4xl mx-auto">
+                        Posture is the basis of all movements. <br>
+                        If it is good, the body functions harmoniously. <br>
+                        If it is compromised, everything else suffers — either immediately or over time.
+                    </p>
+                    <!-- LINIA SUBȚIRE DE ÎNCHEIERE VIZUALĂ -->
+                    <div class="border-t-4 border-green-500 w-24 mx-auto mt-4 rounded"></div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- 5. Contact (Slide 7) -->
+        <section id="contact" class="py-16 bg-white section-separator">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 transition-opacity duration-200 ease-in fade-target"> <!-- FADE TARGET -->
+                <!-- CENTERED CARD FOR CONTACT -->
+                <div class="max-w-4xl mx-auto p-10 bg-gray-50 rounded-xl shadow-2xl border-t-8 border-primary text-center flex flex-col items-center">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold mb-8 text-gray-900">I Look Forward to Welcoming You to the Classes!</h2>
+                    <p class="text-xl text-gray-700 mb-6">
+                        Whether you are a parent, teenager, or adult, I look forward to discussing and finding the best option for you and your family.
+                    </p>
+                    <p class="text-2xl font-bold mb-4 text-gray-800">For details or questions, message me directly on WhatsApp:</p>
+
+                    <!-- WHATSAPP BUTTON -->
+                    <a href="https://wa.me/40728202365" target="_blank" class="inline-flex items-center bg-green-500 text-white text-2xl sm:text-3xl font-bold py-4 px-4 sm:px-10 rounded-full hover:bg-green-600 transition duration-300 shadow-2xl transform hover:scale-105"> 
+                        <span class="mr-3 text-3xl sm:text-4xl">📞</span>
+                        +40728202365
+                    </a>
+
+                    <p class="mt-10 text-xl font-bold text-gray-900">
+                        Sincerely,<br>
+                        RaO
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="header-bg py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+                <p>&copy; 2025 RaO Personal Trainer. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ============================================================================================================================================================== -->
+    <!--                                                                          ROMANIAN CONTENT BLOCK (Hidden by default)                                            -->
+    <!-- ============================================================================================================================================================== -->
+
+    <div id="content-ro" class="content-block hidden">
+        
+        <!-- 1. Despre Mine - Pasiune si Viziune (Slide 2) - FIXED: Removed opacity-0 for instant loading -->
+        <section id="despre" class="py-24 background-despre section-separator">
+            <!-- Overlay-ul asigura lizibilitatea textului -->
+            <div class="background-overlay"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-opacity duration-200 ease-in"> 
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-12 text-white text-center">Despre RaO</h2>
+                <div class="space-y-4 md:space-y-8 text-gray-200 text-lg"> <!-- AJUSTAT: space-y-4 pe mobil, space-y-8 pe desktop -->
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Viziunea Asupra Mișcării</h3>
+                    <!-- Text copiat exact din prezentare (Slide 2, primele 5 paragrafe) -->
+                    <p class="mb-4">
+                        Încă din copilărie am avut o pasiune pentru mișcare și pentru ceea ce poate face corpul omenesc. Am vrut mereu să înțeleg <strong>„mişcările dincolo de cele obişnuite"</strong> - felul în care corpul poate să sară, să se rotească, să îşi menţină echilibrul, să reziste gravitației sau să o folosească în avantajul său.
+                    </p>
+                    <p class="mb-4">
+                        Am început sportul de mic și, de-a lungul anilor, am explorat formele de mişcare care mi-au ieşit în cale — diferite ca stil, ritm şi provocare.
+                    </p>
+                    <p class="mb-4">
+                        Pentru mine, sportul nu a fost niciodată despre trofee, ci despre descoperire, progres și bucuria mișcării.
+                    </p>
+                    <p class="mb-4">
+                        Astăzi, folosesc toate aceste experienţe pentru a crea antrenamente în care mişcarea nu este o obligaţie, ci o formă de explorare, de joc şi de reconectare cu propriul corp.
+                    </p> 
+                    <p class="mb-4">
+                        Vreau să le arăt oamenilor că sportul se poate face și altfel decât este promovat în general. Nu cred în filosofia „no pain, no gain” sau în ideea că valoarea ta se măsoară în câte kilograme împingi la piept. Pentru mine, mișcarea înseamnă să-ți înțelegi corpul și să lucrezi în armonie cu el.
+                    </p>
+                    
+                    <p class="mb-4 italic">
+                        Tocmai de aceea, viziunea mea se bazează pe redescoperirea mișcării fundamentale. În loc să ne concentrăm pe epuizare sau recorduri, vom începe de la bază: cum stai, cum respiri, cum te miști natural.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold mb-4 pt-4 text-primary border-t border-gray-400">Calificări și Fundamente</h3>
+                    <p class="mb-4">
+                        Fiecare etapă a vieții este o nouă oportunitate de evoluție. Prin <strong>dezvoltarea multilaterală</strong>, putem construi nu doar sportivi mai buni, ci și oameni mai sănăşi, mai echilibrați și mai pregătiți pentru provocările vieții.
+                    </p>
+                    <p class="mb-4">
+                        Această viziune mă ghidează în munca mea. Din dorința de a înțelege mai bine corpul și mișcarea am obținut calificări ca instructor fitness, aerobic și stretching, alături de atestările de salvamar și prim ajutor. Nu le privesc ca pe niște diplome formale, ci ca pe instrumente reale prin care pot înțelege și sprijini mai bine oamenii cu care lucrez, asigurând în același timp siguranță maximă.
+                    </p>
+                    <p class="mb-4 mt-6 font-semibold italic">
+                        De-a lungul timpului am participat la numeroase cursuri și workshopuri, însă workshopul „Back to Origin” – Adrian Dumitrașcu a fost cel care mi-a confirmat direcția și mi-a oferit o bază solidă pentru evaluarea posturii și reconectarea neuromusculară.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Dezvoltare Multilaterală (Slide 3 & 4) - FIXED: Removed opacity-0 for instant loading -->
+        <section id="dezvoltare" class="py-16 bg-white section-separator">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-opacity duration-200 ease-in"> 
+                <!-- TITLU SIMPLIFICAT (H2) -->
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4 text-gray-900 text-center">Dezvoltarea Multilaterală</h2>
+                <!-- NOU: SUBTITLU DESCRIPTIV -->
+                <p class="text-center text-xl italic mb-12 text-gray-700 max-w-4xl mx-auto">
+                    Este procesul prin care corpul capătă abilități variate – nu doar „să faci un sport”, ci <strong>să te poți mișca bine în orice context.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Baza - Harta Motorie (Design ușor modificat pentru claritate) -->
+                    <!-- NEW: Added subtle hover effects to cards -->
+                    <div class="p-6 rounded-xl shadow-lg bg-gray-50 border-b-4 border-primary hover:shadow-2xl transition duration-300 hover:-translate-y-1">
+                        <div class="text-4xl text-primary mb-4 text-center">🧠</div> <!-- ADAUGAT EMOJI -->
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 text-center">Hărțile Motorii — Baza Mișcării</h3>
+                        <p class="text-gray-700 text-lg">
+                            <strong>'Ce sunt hărțile motorii?'</strong> 
+                            Sunt conexiuni create între creier, sistemul nervos și mușchi, care îi spun corpului cum, când și cât să se miște.
+                        </p>
+                        <p class="mt-3 text-base italic text-red-500">
+                            Câte hărți motorii ar fi bine să cunoască creierul nostru? Răspuns: cât mai multe!
+                        </p>
+                    </div>
+
+                    <!-- Instinctele Primare (Design ușor modificat pentru claritate) -->
+                    <!-- NEW: Added subtle hover effects to cards -->
+                    <div class="p-6 rounded-xl shadow-lg bg-gray-50 border-b-4 border-primary hover:shadow-2xl transition duration-300 hover:-translate-y-1">
+                        <div class="text-4xl text-primary mb-4 text-center">🏃</div> <!-- RAMAS: 🏃 (Alergare/Mișcare de bază) -->
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 text-center">Instinctele Fundamentale</h3>
+                        <p class="text-gray-700 text-lg">
+                            <strong>Instinctele primare:</strong> târâtul, mersul, alergarea, săritul, aruncatul, prinderea, cățăratul, împinsul, trasul, rostogolirea și lovitul. Fundamentul oricărui sport și al unei vieți active.
+                        </p>
+                        <p class="mt-3 text-base italic text-red-500">
+                            O bază corectă oferă siguranță și eficiență în mișcare.
+                        </p>
+                    </div>
+
+                    <!-- Principii - Disciplina (Design ușor modificat pentru claritate) -->
+                    <!-- NEW: Added subtle hover effects to cards -->
+                    <div class="p-6 rounded-xl shadow-lg bg-gray-50 border-b-4 border-primary hover:shadow-2xl transition duration-300 hover:-translate-y-1">
+                        <div class="text-4xl text-primary mb-4 text-center">🧘</div> <!-- MODIFICAT: 🕰️ -> 🧘 (Meditație/Răbdare) -->
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 text-center">Disciplină și Creștere</h3>
+                        <p class="text-gray-700 text-lg">
+                            Mișcarea variată dezvoltă <strong>răbdare, perseverență și consecvență</strong>. forme de disciplină care nu se impun, ci se descoperă în ritmul fiecărui antrenament. 
+                            <p class="mt-3 text-base italic text-red-500">
+                                Disciplina reală nu înseamnă forțare, ci revenire constantă la mișcare.
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Programe (Slide 5) -->
+        <section id="programe" class="py-16 bg-secondary section-separator">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 transition-opacity duration-200 ease-in fade-target"> <!-- FADE TARGET -->
+                <!-- THE TITLE "RaO Programs" WAS COMPLETELY REMOVED -->
+                
+                <!-- LARGE KEY SUBTITLE - MODIFICAT PENTRU FĂRĂ CULOARE, DOAR BOLD PE CUVINTELE CHEIE -->
+                <h3 class="text-3xl font-extrabold text-gray-900 mx-auto max-w-4xl text-center mb-12">
+                    Antrenamentele mele urmăresc îmbunătățirea instinctelor primare și refacerea legăturii dintre corp și minte, astfel încât mișcarea să devină din nou firească, eficientă și plăcută.
+                </h3>
+
+                <!-- 3-COLUMN GRID (2 pentru programe grup, 1 pentru program personal) -->
+                <div class="program-grid grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- COLOANA 1: PROGRAME GRUP (Sah, Contact, Cadere, Breakdance & Capoeira) -->
+                    <div class="md:col-span-2 p-8 rounded-xl bg-white shadow-2xl border-t-8 border-primary">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900 text-center border-b pb-4">Structura antrenamentelor</h3>
+                        
+                        <!-- HERE THE GAP INCREASE APPLIES TO MOBILE -->
+                        <div class="grid grid-cols-2 gap-8 sm:gap-6">
+                            <!-- 1. Șah -->
+                            <!-- NEW: Added subtle hover effects to cards -->
+                            <div class="p-3 sm:p-4 bg-gray-50 rounded-lg shadow-md transition duration-300 hover:shadow-lg hover:-translate-y-0.5"> <!-- AJUSTAT PADDING: p-3 pe mobil -->
+                                <div class="text-center text-4xl mb-2 text-primary">♟️</div>
+                                <h4 class="text-lg font-bold text-gray-900 text-center">Șah</h4>
+                                <p class="text-gray-700 text-base text-center">
+                                    Logica, concentrarea și planificarea strategică.
+                                </p>
+                            </div>
+
+                            <!-- 2. Sporturi de Contact -->
+                            <!-- NEW: Added subtle hover effects to cards -->
+                            <div class="p-3 sm:p-4 bg-gray-50 rounded-lg shadow-md transition duration-300 hover:shadow-lg hover:-translate-y-0.5"> <!-- AJUSTAT PADDING: p-3 pe mobil -->
+                                <div class="text-center text-4xl mb-2 text-primary">🥊</div> 
+                                <h4 class="text-lg font-bold text-gray-900 text-center">Sporturi de Contact</h4>
+                                <p class="text-gray-700 text-base text-center">
+                                    Dezvoltarea forței și a tehnicilor de autoapărare.
+                                </p>
+                            </div>
+
+                            <!-- 3. Cădere Corectă (MODIFICAT: Scut -> Virgula Verde) -->
+                            <!-- NEW: Added subtle hover effects to cards -->
+                            <div class="p-3 sm:p-4 bg-gray-50 rounded-lg shadow-md transition duration-300 hover:shadow-lg hover:-translate-y-0.5"> <!-- AJUSTAT PADDING: p-3 pe mobil -->
+                                <div class="text-center text-4xl mb-2 text-green-500">✅</div>
+                                <h4 class="text-lg font-bold text-gray-900 text-center">Cădere Corectă</h4>
+                                <p class="text-gray-700 text-base text-center">
+                                    Element vital de siguranță personală și conștientizare corporală.
+                                </p>
+                            </div>
+                            
+                            <!-- 4. Breakdance & Capoeira (COMBINAT) -->
+                            <!-- NEW: Added subtle hover effects to cards -->
+                            <div class="p-3 sm:p-4 bg-gray-50 rounded-lg shadow-md transition duration-300 hover:shadow-lg hover:-translate-y-0.5"> <!-- AJUSTAT PADDING: p-3 pe mobil -->
+                                <div class="text-center text-4xl mb-2 text-primary">🤸🎶</div>
+                                <h4 class="text-lg font-bold text-gray-900 text-center">Breakdance & Capoeira</h4>
+                                <p class="text-gray-700 text-base text-center">
+                                    Explorarea mișcării, fluidității, coordonării și ritmului specific ambelor discipline.
+                                </p>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- COLOANA 2: ANTRENAMENTE PERSONALE -->
+                    <div class="p-8 rounded-xl bg-white shadow-2xl transition duration-300 transform hover:scale-105 border-t-8 border-green-500 flex flex-col justify-between">
+                        <div>
+                            <div class="text-center text-5xl mb-4 text-green-500">🎯</div>
+                            <h3 class="text-2xl font-extrabold mb-3 text-gray-900 text-center">Antrenamente Personale</h3>
+                            <p class="text-gray-700 text-lg text-center mb-6">
+                                Sesiuni individuale adaptate obiectivelor tale.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-700 text-base space-y-2 text-left mx-auto max-w-xs">
+                                <li>Corectarea Posturii</li>
+                                <li>Evaluarea și Adaptarea Progresului</li>
+                                <li>Ghidaj în Alegerea Sportului Potrivit</li>
+                                <li>Planuri Personalizate</li>
+                                <li>Optimizarea Performanței Sportive</li>
+                            </ul>
+                        </div>
+                        <a href="#contact" class="mt-6 bg-green-500 text-white font-bold py-3 px-6 rounded-full text-center hover:bg-green-600 transition">Solicită Oferta Personalizată</a>
+                    </div>
+                    
+                </div>
+                
+                <!-- Mesaj general ajustat -->
+                <p class="text-center text-lg mt-10 text-gray-700 max-w-4xl mx-auto italic">
+                    Fiecare etapă de vârstă are provocările și nevoile ei, iar antrenamentele sunt adaptate corespunzător pentru a sprijini o dezvoltare echilibrată și armonioasă.
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. De Ce Conteaza Postura (Slide 6) -->
+        <section id="postura" class="py-16 bg-white section-separator">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 transition-opacity duration-200 ease-in fade-target"> <!-- FADE TARGET -->
+                <!-- TITLU SIMPLIFICAT (H2) -->
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-12 text-gray-900 text-center">Postura: Baza Sănătății</h2>
+                <p class="text-center text-xl mb-10 text-gray-700 max-w-3xl mx-auto">
+                    Postura nu înseamnă doar „a sta drept”. Este modul eficient, echilibrat şi natural în care corpul își organizează oasele, muşchii și articulațiile.
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Beneficiile Posturii (Fontul din descriere a fost mărit la text-lg) -->
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">1. Previne Durerile</h4> 
+                        <p class="text-lg text-gray-700">Reduce presiunea pe coloană, umeri, genunchi sau șolduri, prevenind contracturile, blocajele și deformările.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">2. Optimizează Respirația</h4> 
+                        <p class="text-lg text-gray-700">Când coloana și cutia toracică sunt aliniate, plămânii pot lucra corect, iar diafragma se mișcă liber. Rezultatul: respiri mai bine, obosești mai greu și ai mai multă claritate mentală.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">3. Îmbunătățește Mișcarea</h4> 
+                        <p class="text-lg text-gray-700"> Postura este „punctul de start” al oricărei mișcări. Dacă baza e dezechilibrată, corpul compensează. Dacă postura e corectă, mișcarea devine mai fluidă, mai sigură și mai eficientă.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">4. Susține Dezvoltarea Copiilor</h4> 
+                        <p class="text-lg text-gray-700"> La copii și adolescenți, postura influențează felul în care cresc, se mișcă, respiră și se pregătesc pentru sport sau viața de zi cu zi. Obiceiurile greșite se transformă în probleme mai târziu.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">5. Contribuie la Încredere</h4> 
+                        <p class="text-lg text-gray-700"> Postura transmite cum te simți cu tine. O postură echilibrată susține nu doar corpul, ci și starea psihică, atenția, felul în care te prezinți sau interacționează.</p> 
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl shadow-md border-l-4 border-green-500">
+                        <h4 class="font-bold text-xl mb-2 text-gray-800">6. Reduce Uzura Articulațiilor</h4> 
+                        <p class="text-lg text-gray-700">Când corpul stă aliniat, fiecare articulație își face treaba cu minim efort. Când postura este dereglată, corpul compensează, iar unele zone „trag” în locul altora, ducând la inflamații și uzură.</p> 
+                    </div>
+                </div>
+
+                <!-- NOU: Concluzia secțiunii Postura -->
+                <div class="mt-12 pt-8 border-t border-gray-300 text-center">
+                    <p class="text-2xl font-extrabold text-gray-900 leading-relaxed max-w-4xl mx-auto">
+                        Postura este baza tuturor mișcărilor. <br>
+                        Dacă ea este bună, corpul funcționează armonios. <br>
+                        Dacă e compromisă, tot restul suferă — fie imediat, fie în timp.
+                    </p>
+                    <!-- LINIA SUBȚIRE DE ÎNCHEIERE VIZUALĂ -->
+                    <div class="border-t-4 border-green-500 w-24 mx-auto mt-4 rounded"></div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- 5. Contact (Slide 7) -->
+        <section id="contact" class="py-16 bg-white section-separator">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 transition-opacity duration-200 ease-in fade-target"> <!-- FADE TARGET -->
+                <!-- CARD CENTRAT PENTRU CONTACT -->
+                <div class="max-w-4xl mx-auto p-10 bg-gray-50 rounded-xl shadow-2xl border-t-8 border-primary text-center flex flex-col items-center">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold mb-8 text-gray-900">Vă Aștept cu Drag la Cursuri!</h2>
+                    <p class="text-xl text-gray-700 mb-6">
+                        Indiferent dacă sunteți părinte, adolescent sau adult, vă aștept să discutăm și să găsim cea mai bună variantă pentru voi și familia voastră.
+                    </p>
+                    <p class="text-2xl font-bold mb-4 text-gray-800">Pentru detalii sau întrebări, scrieți-mi direct pe WhatsApp:</p>
+
+                    <!-- WHATSAPP BUTTON -->
+                    <a href="https://wa.me/40728202365" target="_blank" class="inline-flex items-center bg-green-500 text-white text-2xl sm:text-3xl font-bold py-4 px-4 sm:px-10 rounded-full hover:bg-green-600 transition duration-300 shadow-2xl transform hover:scale-105"> 
+                        <span class="mr-3 text-3xl sm:text-4xl">📞</span>
+                        +40728202365
+                    </a>
+
+                    <p class="mt-10 text-xl font-bold text-gray-900">
+                        Cu stimă,<br>
+                        RaO
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="header-bg py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+                <p>&copy; 2025 RaO Personal Trainer. Toate drepturile rezervate.</p>
+            </div>
+        </footer>
+    </div>
+    
+</body>
+</html>
