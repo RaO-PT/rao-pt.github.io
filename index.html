@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- UPDATED: Title and Meta Description, plus added Meta Keywords -->
-    <title id="page-title">RaO Movement | Natural Movement & Personalized Training</title>
+    <title id="page-title">RaO Movement | Mișcare Naturală & Antrenamente Personalizate</title>
     <meta name="description" content="RaO Movement – Personalized training, conscious movement, and natural development. Rediscover the joy of movement through training based on balance, posture, and primal instincts.">
     <meta name="keywords" content="personal trainer, natural movement, posture correction, bodily development, conscious fitness, RaO Movement, Bucharest training">
     <!-- Load Tailwind CSS -->
@@ -134,7 +134,7 @@
 
         // FUNCTIONALITY: Smooth Scrolling and Mobile Menu Closing after link click
         document.addEventListener('DOMContentLoaded', () => {
-            // Restore saved language preference (FIXED: Default to 'ro')
+            // FIX: Force default language to Romanian if no preference is saved.
             const savedLang = localStorage.getItem('rao_lang') || 'ro';
             switchLanguage(savedLang);
 
@@ -215,7 +215,7 @@
                     <div class="logo-container">
                         <h1 class="text-4xl font-extrabold text-white">RaO</h1>
                         <!-- UPDATED: Changed text-base to text-lg for better prominence -->
-                        <span class="text-lg font-semibold text-primary block mt-1" id="trainer-tagline">Personal Trainer</span>
+                        <span class="text-lg font-semibold text-primary block mt-1" id="trainer-tagline">Antrenor Personal</span>
                     </div>
                     <!-- End LOGO -->
                     
@@ -240,10 +240,10 @@
                     <nav class="hidden md:block">
                         <!-- MODIFIED: Reduced space-x-6 to space-x-4 for tighter navigation links -->
                         <ul class="flex space-x-4 items-center">
-                            <li><a href="#despre" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="About Me" data-lang-ro="Despre Mine">About Me</a></li>
-                            <li><a href="#dezvoltare" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="Multilateral Development" data-lang-ro="Dezvoltare Multilaterală">Multilateral Development</a></li>
-                            <li><a href="#programe" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="Programs" data-lang-ro="Programe">Programs</a></li>
-                            <li><a href="#postura" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="Posture" data-lang-ro="Postura">Posture</a></li>
+                            <li><a href="#despre" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="About Me" data-lang-ro="Despre Mine">Despre Mine</a></li>
+                            <li><a href="#dezvoltare" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="Multilateral Development" data-lang-ro="Dezvoltare Multilaterală">Dezvoltare Multilaterală</a></li>
+                            <li><a href="#programe" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="Programs" data-lang-ro="Programe">Programe</a></li>
+                            <li><a href="#postura" class="text-white hover:text-primary transition duration-300 font-medium rounded-md p-2" data-lang-en="Posture" data-lang-ro="Postura">Postura</a></li>
                             
                             <li><a href="#contact" class="bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300 font-bold shadow-md" data-lang-en="Contact" data-lang-ro="Contact">Contact</a></li>
                         </ul>
@@ -264,10 +264,10 @@
         <!-- Mobile Dropdown Menu (REMOVED REDUNDANT LANGUAGE BUTTONS) -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
             <ul class="flex flex-col space-y-2 p-4">
-                <li><a href="#despre" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">About Me</a></li>
-                <li><a href="#dezvoltare" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Multilateral Development</a></li>
-                <li><a href="#programe" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Programs</a></li>
-                <li><a href="#postura" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Posture</a></li>
+                <li><a href="#despre" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Despre Mine</a></li>
+                <li><a href="#dezvoltare" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Dezvoltare Multilaterală</a></li>
+                <li><a href="#programe" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Programe</a></li>
+                <li><a href="#postura" class="block text-white hover:text-primary transition duration-300 font-medium p-2 rounded-md" onclick="toggleMenu()">Postura</a></li>
                 <li><a href="#contact" class="block bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300 font-bold shadow-md text-center" onclick="toggleMenu()">Contact</a></li>
             </ul>
         </div>
@@ -277,7 +277,7 @@
     <!--                                                                          ENGLISH CONTENT BLOCK                                                                 -->
     <!-- ============================================================================================================================================================== -->
 
-    <div id="content-en" class="content-block">
+    <div id="content-en" class="content-block hidden">
         
         <!-- 1. About Me - Passion and Vision (Slide 2) - FIXED: Removed opacity-0 for instant loading -->
         <section id="despre" class="py-24 background-despre section-separator">
@@ -323,7 +323,7 @@
                         This vision guides my work. I earned certifications in fitness, aerobics, stretching, lifeguarding, and first aid — not for the titles, but <strong>to better support the people I train.</strong>
                     </p>
                     <p class="mb-4 mt-6 font-semibold italic">
-                       Over time, I attended various courses and workshops, but **Back to Origin workshop led by Adrian Dumitrașcu** was the one that truly confirmed my path and provided a solid foundation for posture assessment and neuromuscular reconnection.
+                       Over time, I attended various courses and workshops, but <strong>Back to Origin workshop led by Adrian Dumitrașcu</strong> was the one that truly confirmed my path and provided a solid pattern for posture assessment and neuromuscular reconnection.
                     </p>
                 </div>
             </div>
@@ -341,7 +341,7 @@
 
                 <div class="grid md:grid-cols-3 gap-8">
                     <!-- CARD 1: Fundamental Instincts (ORIGINALLY CARD 2) -->
-                    <!-- I've moved this DIV block to be the first in the grid, swapping it with Motor Maps -->
+                    <!-- This block was intentionally moved to be first in the grid for the EN version -->
                     <div class="p-6 rounded-xl shadow-lg bg-gray-50 border-b-4 border-primary hover:shadow-2xl transition duration-300 hover:-translate-y-1">
                         <div class="text-4xl text-primary mb-4 text-center">🏃</div> <!-- REMAINED: 🏃 (Running/Basic Movement) -->
                         <h3 class="text-xl font-bold mb-2 text-gray-800 text-center">Fundamental Instincts</h3>
@@ -558,7 +558,7 @@
     <!--                                                                          ROMANIAN CONTENT BLOCK (Hidden by default)                                            -->
     <!-- ============================================================================================================================================================== -->
 
-    <div id="content-ro" class="content-block hidden">
+    <div id="content-ro" class="content-block">
         
         <!-- 1. Despre Mine - Pasiune si Viziune (Slide 2) - FIXED: Removed opacity-0 for instant loading -->
         <section id="despre" class="py-24 background-despre section-separator">
@@ -594,7 +594,7 @@
                         Fiecare etapă a vieții este o nouă oportunitate de evoluție. Prin <strong>dezvoltarea multilaterală</strong>, putem construi nu doar sportivi mai buni, ci și oameni mai sănăşi, mai echilibrați și mai pregătiți pentru provocările vieții.
                     </p>
                     <p class="mb-4">
-                        Această viziune mă ghidează în munca mea. Din dorința de a înțelege mai bine corpul și mișcarea am obținut calificări ca instructor fitness, aerobic și stretching, alături de atestările de salvamar și prim ajutor. Nu le privesc ca pe niști diplome formale, ci ca pe instrumente reale prin care pot înțelege și sprijini mai bine oamenii cu care lucrez, asigurând în același timp siguranță maximă.
+                        Această viziune mă ghidează în munca mea. Din dorința de a înțelege mai bine corpul și mișcarea am obținut calificări ca instructor fitness, aerobic și stretching, alături de atestările de salvamar și prim ajutor. Nu le privesc ca pe niște diplome formale, ci ca pe o bază solidă de cunoștințe aplicate, prin care să pot înțelege și sprijini mai bine oamenii cu care lucrez.
                     </p>
                     <p class="mb-4 mt-6 font-semibold italic">
                         De-a lungul timpului am participat la numeroase cursuri și workshopuri, însă workshopul „Back to Origin” – Adrian Dumitrașcu a fost cel care mi-a confirmat direcția și mi-a oferit o bază solidă pentru evaluarea posturii și reconectarea neuromusculară.
@@ -620,7 +620,7 @@
                         <div class="text-4xl text-primary mb-4 text-center">🏃</div> <!-- RAMAS: 🏃 (Alergare/Mișcare de bază) -->
                         <h3 class="text-xl font-bold mb-2 text-gray-800 text-center">Instinctele Fundamentale</h3>
                         <p class="text-gray-700 text-lg">
-                           Târâtul, mersul, alergarea, săritul, aruncatul, prinderea, cățăratul, împinsul, trasul, rostogolirea și lovitul. Ele reprezintă fundamentul oricărui sport și al unui corp funcțional, capabil să se adapteze.
+                            Târâtul, mersul, alergarea, săritul, aruncatul, prinderea, cățăratul, împinsul, trasul, rostogolirea și lovitul. Ele reprezintă fundamentul oricărui sport și al unui corp funcțional, capabil să se adapteze.
                         </p>
                         <p class="mt-3 text-base italic text-red-500">
                             Mișcarea devine sigură și eficientă atunci când baza este construită corect.
